@@ -11,8 +11,11 @@ ORIGINAL_COMMIT_MESSAGE=`cat ${ORIGINAL_COMMIT_MESSAGE_FILENAME}`
 # The ticket id is assumed to be embedded as digits in the branch name
 TICKET_ID=`git branch | grep '^\*' | sed 's/[^0-9]//g'`
 
+# The URL to the ticket
+TICKET_URL="https://www.example.org/tickets?$TICKET_ID"
+
 # The ticket id message will be added to the original commit message
-TICKET_ID_MSG="Ticket ID: $TICKET_ID"
+TICKET_ID_MSG="Ticket ID: $TICKET_ID ($TICKET_URL)"
 
 # Insert 2 newlines (to leave room for a new title and commit message)
 # followed by the ticket id message and then the original commit message
