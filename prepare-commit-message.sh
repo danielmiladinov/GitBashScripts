@@ -20,6 +20,9 @@ TICKET_ID_MSG="Ticket ID: $TICKET_ID"
 # But only if a ticket id was found
 if [ "$TICKET_ID" != "" ];
 then
-    echo "\n\n$TICKET_ID_MSG\n$ORIGINAL_COMMIT_MESSAGE" > "$TEMP_FILENAME"
-    cat "$TEMP_FILENAME" > "$ORIGINAL_COMMIT_MESSAGE_FILENAME"
+    if ! `echo $ORIGINAL_COMMIT_MESSAGE | grep "$TICKET_ID_MSG" 1> /dev/null 2>&1`
+    then
+        echo "\n\n$TICKET_ID_MSG\n$ORIGINAL_COMMIT_MESSAGE" > "$TEMP_FILENAME"
+        cat "$TEMP_FILENAME" > "$ORIGINAL_COMMIT_MESSAGE_FILENAME"
+    fi
 fi
