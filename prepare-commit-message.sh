@@ -22,7 +22,12 @@ if [ "$TICKET_ID" != "" ];
 then
     if ! `echo $ORIGINAL_COMMIT_MESSAGE | grep "$TICKET_ID_MSG" 1> /dev/null 2>&1`
     then
-        echo "\n\n$TICKET_ID_MSG\n$ORIGINAL_COMMIT_MESSAGE" > "$TEMP_FILENAME"
+        if `echo $ORIGINAL_COMMIT_MESSAGE | grep "^[Mm]erge branch" 1> /dev/null 2>&1` 
+        then
+            echo "$ORIGINAL_COMMIT_MESSAGE\n\n$TICKET_ID_MSG" > "$TEMP_FILENAME"
+        else
+            echo "\n\n$TICKET_ID_MSG\n$ORIGINAL_COMMIT_MESSAGE" > "$TEMP_FILENAME"
+        fi
         cat "$TEMP_FILENAME" > "$ORIGINAL_COMMIT_MESSAGE_FILENAME"
     fi
 fi
