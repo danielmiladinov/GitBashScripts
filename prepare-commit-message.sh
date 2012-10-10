@@ -16,5 +16,10 @@ TICKET_ID_MSG="Ticket ID: $TICKET_ID"
 
 # Insert 2 newlines (to leave room for a new title and commit message)
 # followed by the ticket id message and then the original commit message
-echo "\n\n$TICKET_ID_MSG\n$ORIGINAL_COMMIT_MESSAGE" > "$TEMP_FILENAME"
-cat "$TEMP_FILENAME" > "$ORIGINAL_COMMIT_MESSAGE_FILENAME"
+
+# But only if a ticket id was found
+if [ "$TICKET_ID" != "" ];
+then
+    echo "\n\n$TICKET_ID_MSG\n$ORIGINAL_COMMIT_MESSAGE" > "$TEMP_FILENAME"
+    cat "$TEMP_FILENAME" > "$ORIGINAL_COMMIT_MESSAGE_FILENAME"
+fi
