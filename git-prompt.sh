@@ -17,7 +17,7 @@ BLUE="\[\033[01;34m\]"
 # If we are currently rebasing, reflect that in the prompt.
 # We can test for the existence of rebase-apply to see if we are rebasing.
 function parse_git_in_rebase {
-  [[ -d .git/rebase-apply ]] && echo " REBASING"
+  [[ -d .git/rebase-merge ]] && echo " REBASING"
 }
 
 # If there is anything changed or uncommitted, reflect that in the prompt.
