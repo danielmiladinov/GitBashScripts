@@ -2481,3 +2481,6 @@ __git_complete gitk __gitk_main
 if [ Cygwin = "$(uname -o 2>/dev/null)" ]; then
 __git_complete git.exe __git_main
 fi
+
+# Auto-complete git commands when just g<Tab> is pressed
+complete -o bashdefault -o default -o nospace -F _git g 2> /dev/null \ || complete -o default -o nosapce -F _git g
