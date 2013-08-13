@@ -29,6 +29,12 @@ function parse_git_dirty {
 # Show the name of the active branch, if applicable
 # Grab the current git branch name, also displaying its dirty/clean/rebasing status
 function parse_git_branch {
+  withinGitDirectory=$(pwd | grep ".git")
+  if [[ -n ${withinGitDirectory} ]]; then
+    echo "(GIT_DIR!)"
+    return
+  fi
+
   branch=$(git branch 2> /dev/null | grep "*" | sed -e s/^..//g)
   if [[ -z ${branch} ]]; then
     return
