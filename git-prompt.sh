@@ -13,11 +13,14 @@ BLUE="\[\033[01;34m\]"
 # Prompt Setup
 #
 
+GIT_DIR=`git rev-parse --git-dir`
 
 # If we are currently rebasing, reflect that in the prompt.
 # We can test for the existence of rebase-apply to see if we are rebasing.
 function parse_git_in_rebase {
-  [[ -d .git/rebase-merge ]] && echo " REBASING"
+  if [ -d $GIT_DIR/rebase-merge ] || [ -d $GIT_DIR/rebase-apply ]; then
+    echo " REBASING"
+  fi
 }
 
 # If there is anything changed or uncommitted, reflect that in the prompt.
