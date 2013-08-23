@@ -23,7 +23,12 @@ function parse_git_in_rebase {
 # If there is anything changed or uncommitted, reflect that in the prompt.
 # Unless the last line of git status' output is "nothing to commit", then the repo is considered "dirty"
 function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo " *"
+  # prevent star expansion (globbing)
+  set -f
+  statusOutput=$(git status 2> /dev/null | tail -n1)
+  [[ $statusOutput != "nothing to commit (working directory clean)" ]] && echo " *"
+  # re-enable star expansion
+  set +f
 }
 
 # Show the name of the active branch, if applicable
